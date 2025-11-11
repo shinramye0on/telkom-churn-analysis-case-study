@@ -1,0 +1,858 @@
+---
+title: "C14230098_Lindawati_Laporan"
+author: "Linda"
+date: "2025-10-09"
+output: html_document
+---
+
+# Analisa Data Kategori (Qualitative)
+## 1. Tabel Frekuensi
+
+```{r}
+data = read.csv("Telkom.csv")
+head(data)
+names(data)
+summary(data)
+
+# gender, seniorcitizen, partner, dependents, phoneservice, multiplelines, internetservice, onlinesecurity, OnlineBackup, DeviceProtection, TechSupport, StreamingTV, StreamingMovies, Contract, PaperlessBilling, PaymentMethod, dan Churn berupa character maka akan saya ubah menjadi category terlebih dahulu
+
+data$Gender = as.factor(data$Gender)
+data$SeniorCitizen = as.factor(data$SeniorCitizen)
+data$Partner = as.factor(data$Partner)
+data$Dependents = as.factor(data$Dependents)
+data$PhoneService = as.factor(data$PhoneService)
+data$MultipleLines = as.factor(data$MultipleLines)
+data$OnlineSecurity = as.factor(data$OnlineSecurity)
+data$OnlineBackup = as.factor(data$OnlineBackup)
+data$DeviceProtection = as.factor(data$DeviceProtection)
+data$TechSupport = as.factor(data$TechSupport)
+data$StreamingTV = as.factor(data$StreamingTV)
+data$StreamingMovies = as.factor(data$StreamingMovies)
+data$Contract = as.factor(data$Contract)
+data$PaperlessBilling = as.factor(data$PaperlessBilling)
+data$PaymentMethod = as.factor(data$PaymentMethod)
+data$Churn = as.factor(data$Churn)
+data$InternetService = as.factor(data$InternetService)
+
+summary(data)
+
+N = length(data$Churn)
+Churn_Freq = table(data$Churn)
+Churn_Freq
+Churn_FRel = Churn_Freq/N
+Churn_FRel
+barplot(Churn_Freq,
+        main = "Distribusi Pelanggan yang tidak lanjut Berlangganan",
+        xlab = "Churn",
+        ylab = "Frekuensi",
+        col = rainbow(2))
+
+SeniorCitizen_Freq = table(data$SeniorCitizen)
+SeniorCitizen_Freq
+SeniorCitizen_FRel = SeniorCitizen_Freq/N
+SeniorCitizen_FRel
+barplot(SeniorCitizen_Freq,
+        main = "Distribusi Pelanggan Lanjut Usia",
+        xlab = "Senior Citizen",
+        ylab = "Frekuensi",
+        col = rainbow(2))
+
+Dependents_Freq = table(data$Dependents)
+Dependents_Freq
+Dependents_FRel = Dependents_Freq/N
+Dependents_FRel
+barplot(Dependents_Freq,
+        main = "Distribusi Pelanggan yang memiliki tanggungan",
+        xlab = "Dependents",
+        ylab = "Frekuensi",
+        col = rainbow(2))
+
+PhoneService_Freq = table(data$PhoneService)
+PhoneService_Freq
+PhoneService_FRel = PhoneService_Freq/N
+PhoneService_FRel
+barplot(PhoneService_Freq,
+        main = "Distribusi Pelanggan yang menggunakan Telepon Rumah",
+        xlab = "Phone Service",
+        ylab = "Frekuensi",
+        col = rainbow(2))
+
+InternetService_Freq = table(data$InternetService)
+InternetService_Freq
+InternetService_FRel = InternetService_Freq/N
+InternetService_FRel
+barplot(InternetService_Freq,
+        main = "Distribusi Pelanggan yang menggunakan Layanan Internet",
+        xlab = "Internet Service",
+        ylab = "Frekuensi",
+        col = rainbow(3))
+
+OnlineSecurity_Freq = table(data$OnlineSecurity)
+OnlineSecurity_Freq
+OnlineSecurity_FRel = OnlineSecurity_Freq/N
+OnlineSecurity_FRel
+barplot(OnlineSecurity_Freq,
+        main = "Distribusi Pelanggan yang menggunakan Layanan Online Security",
+        xlab = "Online Security",
+        ylab = "Frekuensi",
+        col = rainbow(3))
+
+OnlineBackup_Freq = table(data$OnlineBackup)
+OnlineBackup_Freq
+OnlineBackup_FRel = OnlineBackup_Freq/N
+OnlineBackup_FRel
+barplot(OnlineBackup_Freq,
+        main = "Distribusi Pelanggan yang menggunakan Layanan Backup Online",
+        xlab = "Backup Online",
+        ylab = "Frekuensi",
+        col = rainbow(3))
+
+DeviceProtection_Freq = table(data$DeviceProtection)
+DeviceProtection_Freq
+DeviceProtection_FRel = DeviceProtection_Freq/N
+DeviceProtection_FRel
+barplot(DeviceProtection_Freq,
+        main = "Distribusi Pelanggan yang menggunakan Layanan Proteksi Device",
+        xlab = "Device Protection",
+        ylab = "Frekuensi",
+        col = rainbow(3))
+
+TechSupport_Freq = table(data$TechSupport)
+TechSupport_Freq
+TechSupport_FRel = TechSupport_Freq/N
+TechSupport_FRel
+barplot(TechSupport_Freq,
+        main = "Distribusi Pelanggan yang menggunakan Layanan Tech Support",
+        xlab = "Tech Support",
+        ylab = "Frekuensi",
+        col = rainbow(3))
+
+Contract_Freq = table(data$Contract)
+Contract_Freq
+Contract_FRel = Contract_Freq/N
+Contract_FRel
+barplot(Contract_Freq,
+        main = "Distribusi Contract",
+        xlab = "Contract",
+        ylab = "Frekuensi",
+        col = rainbow(3))
+
+PaperlessBilling_Freq = table(data$PaperlessBilling)
+PaperlessBilling_Freq
+PaperlessBilling_FRel = PaperlessBilling_Freq/N
+PaperlessBilling_FRel
+barplot(PaperlessBilling_Freq,
+        main = "Distribusi Pelanggan dengan Tagihan Digital",
+        xlab = "Paperless Billing",
+        ylab = "Frekuensi",
+        col = rainbow(2))
+
+PaymentMethod_Freq = table(data$PaymentMethod)
+PaymentMethod_Freq
+PaymentMethod_FRel = PaymentMethod_Freq/N
+PaymentMethod_FRel
+barplot(PaymentMethod_Freq,
+        main = "Distribusi Metode Pembayaran",
+        xlab = "Metode Pembayaran",
+        ylab = "Frekuensi",
+        col = rainbow(4))
+
+```
+
+## Kesimpulan analisa data kategori dengan tabel frekuensi
+
+Pelanggan telkom yang berhenti berlangganan sebanyak `r round(Churn_FRel[2]*100,2)`% dan yang masih berlangganan sebanyak `r round(Churn_FRel[1]*100,2)`%.
+
+Pelanggan telkom terdiri dari `r SeniorCitizen_Freq[1]` (`r round(SeniorCitizen_FRel[1]*100,2)`%) anak muda dan `r SeniorCitizen_Freq[2]` (`r round(SeniorCitizen_FRel[2]*100,2)`%) lanjut usia. 
+
+Dengan mayoritas pelanggan yang masih muda maka jumlah pelanggan yang tidak memiliki tanggungan lebih banyak sebesar `r Dependents_Freq[1]` (`r round(Dependents_FRel[1]*100,2)`%) dibandingkan dengan yang memiliki tanggungan sebesar `r Dependents_Freq[2]` (`r round(Dependents_FRel[2]*100,2)`%)
+
+Sebagian besar pelanggan telkom menggunakan layanan telepon rumah. Hal ini bisa dilihat dari `r round(PhoneService_FRel[2]*100,2)`% pelanggan telkom berlangganan telepon rumah, sedangkan `r round(PhoneService_FRel[1]*100,2)`% tidak berlangganan telepon rumah.
+
+Telihat banyak pelanggan yang menggunakan layanan fiber optic (`r InternetService_Freq[2]`) yang disusul dengan DSL (`r InternetService_Freq[1]`).
+
+Dapat dilihat dari distribusi layanan tambahan internet (seperti Online Security, Online Backup, Device Protection, dan tech support) sebanyak `r round(OnlineSecurity_FRel[1]*100,2)`%, `r round(OnlineBackup_FRel[1]*100,2)`%, `r round(DeviceProtection_FRel[1]*100,2)`%, dan `r round(TechSupport_FRel[1]*100,2)`% memilih untuk tidak menggunakan layanan tambahan.
+
+Banyak pelanggan yang lebih memilih berlangganan month-to-month (`r round(Contract_FRel[1]*100,2)`%) dibandingkan 2 pilihan lainnya yaitu one year (`r round(Contract_FRel[2]*100,2)`%) dan two year (`r round(Contract_FRel[3]*100,2)`%).
+
+Mayoritas pelanggan telkom lebih memilih menggunakan paperless billing (`r PaperlessBilling_Freq[2]`) sehingga metode pembayaran dengan electronic check lebih banyak (`r PaymentMethod_Freq[3]`).
+
+## 2. Tabel Kontingensi
+
+```{r}
+library(pivottabler)
+# hubungan churn dengan lansia
+qhpvt(data,"Churn","SeniorCitizen","n()")
+#kiri bawah = total senior citizen
+
+Tab_Churn_Senior = table(data$Churn, data$Senior)
+
+PercentByTotalCS = Tab_Churn_Senior/N
+PercentByTotalCS = round(PercentByTotalCS*100,2)
+PercentByTotalCS
+
+PercentByColCS = prop.table(Tab_Churn_Senior, margin = 2) * 100
+PercentByColCS = round(PercentByColCS,2)
+PercentByColCS
+
+PercentByRowCS = prop.table(Tab_Churn_Senior, margin = 1) * 100
+PercentByRowCS = round(PercentByRowCS,2)
+PercentByRowCS
+# dari yang tidak lanjut berlangganan sebanyak 25.47% nya adalah lansia
+
+# hubungan churn dengan pelanggan yang memiliki tanggungan (seperti keluarga)
+qhpvt(data,"Churn","Dependents","n()")
+
+Tab_Churn_Depen = table(data$Churn, data$Dependents)
+
+PercentByTotalCD = Tab_Churn_Depen/N
+PercentByTotalCD = round(PercentByTotalCD*100,2)
+PercentByTotalCD
+
+PercentByColCD = prop.table(Tab_Churn_Depen, margin = 2) * 100
+PercentByColCD = round(PercentByColCD,2)
+PercentByColCD
+# 84.47% pelanggan yang memiliki tanggungan akan melanjutkan langganan (service)
+PercentByRowCD = prop.table(Tab_Churn_Depen, margin = 1) * 100
+PercentByRowCD = round(PercentByRowCD,2)
+PercentByRowCD
+
+# hubungan churn dengan phone service
+qhpvt(data,"Churn","PhoneService","n()")
+
+Tab_Churn_Phone = table(data$Churn, data$PhoneService)
+
+PercentByTotalCP = Tab_Churn_Phone/N
+PercentByTotalCP = round(PercentByTotalCP*100,2)
+PercentByTotalCP
+
+PercentByColCP = prop.table(Tab_Churn_Phone, margin = 2) * 100
+PercentByColCP = round(PercentByColCP,2)
+PercentByColCP
+
+PercentByRowCP = prop.table(Tab_Churn_Phone, margin = 1) * 100
+PercentByRowCP = round(PercentByRowCP,2)
+PercentByRowCP
+
+# hubungan churn dengan internet service
+qhpvt(data,"Churn","InternetService","n()")
+
+Tab_Churn_Internet = table(data$Churn, data$InternetService)
+
+PercentByTotalCI = Tab_Churn_Internet/N
+PercentByTotalCI = round(PercentByTotalCI*100,2)
+PercentByTotalCI
+
+PercentByColCI = prop.table(Tab_Churn_Internet, margin = 2) * 100
+PercentByColCI = round(PercentByColCI,2)
+PercentByColCI
+# dari seluruh pelanggan yang menggunakan fiber optics, 41.89% nya tidak lanjut berlangganan
+
+PercentByRowCI = prop.table(Tab_Churn_Internet, margin = 1) * 100
+PercentByRowCI = round(PercentByRowCI,2)
+PercentByRowCI
+# dari seluruh pelanggan yang tidak lanjut berlangganan, 69.40% nya menggunakan fiber optic
+
+# hubungan churn dengan Online Security
+qhpvt(data,"Churn","OnlineSecurity","n()")
+
+Tab_Churn_OnlineSecurity = table(data$Churn, data$OnlineSecurity)
+
+PercentByTotalCO = Tab_Churn_OnlineSecurity/N
+PercentByTotalCO = round(PercentByTotalCO*100,2)
+PercentByTotalCO
+
+PercentByColCO = prop.table(Tab_Churn_OnlineSecurity, margin = 2) * 100
+PercentByColCO = round(PercentByColCO,2)
+PercentByColCO
+# jika dibandingkan, pelanggan yang tidak menggunakan online security lebih banyak yang tidak lanjut dibandingkan yang menggunakan
+
+PercentByRowCO = prop.table(Tab_Churn_OnlineSecurity, margin = 1) * 100
+PercentByRowCO = round(PercentByRowCO,2)
+PercentByRowCO
+# dari seluruh pelanggan yang tidak melanjutkan langganan, 78.17% nya tidak menggunakan online security
+
+# hubungan churn dengan Online Backup
+qhpvt(data,"Churn","OnlineBackup","n()")
+
+Tab_Churn_OnlineBackup = table(data$Churn, data$OnlineBackup)
+
+PercentByTotalCOB = Tab_Churn_OnlineBackup/N
+PercentByTotalCOB = round(PercentByTotalCOB*100,2)
+PercentByTotalCOB
+
+PercentByColCOB = prop.table(Tab_Churn_OnlineBackup, margin = 2) * 100
+PercentByColCOB = round(PercentByColCOB,2)
+PercentByColCOB
+# pelanggan yang tidak menggunakan Online Backup persentase churn nya lebih tinggi 2x lipat dbanding yang menggunakan
+
+PercentByRowCOB = prop.table(Tab_Churn_OnlineBackup, margin = 1) * 100
+PercentByRowCOB = round(PercentByRowCOB,2)
+PercentByRowCOB
+# dari seluruh pelanggan yang tidak melanjutkan langganan, 65.97% tidak menggunakan online backup
+
+# hubungan churn dengan Device Protection
+qhpvt(data,"Churn","DeviceProtection","n()")
+
+Tab_Churn_DeviceProtection = table(data$Churn, data$DeviceProtection)
+
+PercentByTotalCDP = Tab_Churn_DeviceProtection/N
+PercentByTotalCDP = round(PercentByTotalCDP*100,2)
+PercentByTotalCDP
+
+PercentByColCDP = prop.table(Tab_Churn_DeviceProtection, margin = 2) * 100
+PercentByColCDP = round(PercentByColCDP,2)
+PercentByColCDP
+# pelanggan yang tidak menggunakan device protection memiliki kecenderungan churn lebih tinggi sebesar 39.14%
+
+PercentByRowCDP = prop.table(Tab_Churn_DeviceProtection, margin = 1) * 100
+PercentByRowCDP = round(PercentByRowCDP,2)
+PercentByRowCDP
+# dari seluruh pelanggan yang churn, 64.79% tidak menggunakan Device Protection
+
+# hubungan churn dengan Tech Support
+qhpvt(data,"Churn","TechSupport","n()")
+
+Tab_Churn_TechSupport = table(data$Churn, data$TechSupport)
+
+PercentByTotalCTS = Tab_Churn_TechSupport/N
+PercentByTotalCTS = round(PercentByTotalCTS*100,2)
+PercentByTotalCTS
+
+PercentByColCTS = prop.table(Tab_Churn_TechSupport, margin = 2) * 100
+PercentByColCTS = round(PercentByColCTS,2)
+PercentByColCTS
+# sama seperti kesimpulan layanan tambahan yang lain, banyak yang churn kalau tidak menggunakan
+
+PercentByRowCTS = prop.table(Tab_Churn_TechSupport, margin = 1) * 100
+PercentByRowCTS = round(PercentByRowCTS,2)
+PercentByRowCTS
+# dari seluruh pelanggan yang churn, 77,37% tidak menggunakan tech support
+
+# hubungan churn dengan Contract
+qhpvt(data,"Churn","Contract","n()")
+
+Tab_Churn_Contract = table(data$Churn, data$Contract)
+
+PercentByTotalCC = Tab_Churn_Contract/N
+PercentByTotalCC = round(PercentByTotalCC*100,2)
+PercentByTotalCC
+
+PercentByColCC = prop.table(Tab_Churn_Contract, margin = 2) * 100
+PercentByColCC = round(PercentByColCC,2)
+PercentByColCC
+
+PercentByRowCC = prop.table(Tab_Churn_Contract, margin = 1) * 100
+PercentByRowCC = round(PercentByRowCC,2)
+PercentByRowCC
+# dari seluruh pelanggan yang tidak lanjut berlangganan 88.55% menggunakan layanan yang month-to-month
+
+# hubungan churn dengan PaperlessBilling
+qhpvt(data,"Churn","PaperlessBilling","n()")
+
+Tab_Churn_PaperlessBilling = table(data$Churn, data$PaperlessBilling)
+
+PercentByTotalCPB = Tab_Churn_PaperlessBilling/N
+PercentByTotalCPB = round(PercentByTotalCPB*100,2)
+PercentByTotalCPB
+
+PercentByColCPB = prop.table(Tab_Churn_PaperlessBilling, margin = 2) * 100
+PercentByColCPB = round(PercentByColCPB,2)
+PercentByColCPB
+
+PercentByRowCPB = prop.table(Tab_Churn_PaperlessBilling, margin = 1) * 100
+PercentByRowCPB = round(PercentByRowCPB,2)
+PercentByRowCPB
+# dari seluruh pelanggan yang tidak melanjutkan langganan 74.91% nya menggunakan paperlessbilling
+
+# hubungan churn dengan PaymentMethod
+qhpvt(data,"Churn","PaymentMethod","n()")
+
+Tab_Churn_PaymentMethod = table(data$Churn, data$PaymentMethod)
+
+PercentByTotalCPM = Tab_Churn_PaymentMethod/N
+PercentByTotalCPM = round(PercentByTotalCPM*100,2)
+PercentByTotalCPM
+#dari seluruh pelanggan telkom, 15.23% yang tidak melanjutkan berlangganan menggunakan electronic check
+
+PercentByColCPM = prop.table(Tab_Churn_PaymentMethod, margin = 2) * 100
+PercentByColCPM = round(PercentByColCPM,2)
+PercentByColCPM
+#dari seluruh pelanggan yang menggunakan electronic check, 45.29% nya tidak lanjut berlangganan
+
+
+PercentByRowCPM = prop.table(Tab_Churn_PaymentMethod, margin = 1) * 100
+PercentByRowCPM = round(PercentByRowCPM,2)
+PercentByRowCPM
+#dari seluruh pelanggan yang tidak lanjut berlangganan, 57.30% nya menggunakan electronic check
+```
+
+## Kesimpulan analisa data kategori dengan tabel kontingensi
+
+Dari seluruh pelanggan yang tidak lanjut berlangganan, sebanyak 25.47% adalah lansia.
+
+Dari seluruh pelanggan yang memiliki tanggungan, sebesar `r PercentByColCD[1,2]`% akan melanjutkan berlangganan.
+
+Dari seluruh pelanggan, sebanyak `r PercentByTotalCP[1,2]`%
+menggunakan layanan telepon rumah (phone service) dan melanjutkan langganan.
+
+Dari seluruh pelanggan, sebanyak `r PercentByTotalCI[2,2]`% menggunakan fiber optic dan tidak lanjut berlangganan. Kalau kita bandingkan pelanggan fiber optic yang lanjut berlangganan dan tidak, sebanyak `r PercentByColCI[2,2]`% tidak lanjut berlangganan dan `r PercentByColCI[1,2]`% lanjut berlangganan, perbedaan yang tipis. Dari seluruh pelanggan yang tidak lanjut berlangganan `r PercentByRowCI[2,2]`% nya menggunakan fiber optic.
+
+Jika dilihat dari persentase-persentase layanan tambahan (Online Security, Online Backup, Device Protection, Tech Support), pelanggan yang tidak menggunakan layanan tambahan memiliki persentase churn yang lebih tinggi yaitu `r PercentByColCO[2,1]`% (Online Security), `r PercentByColCOB[2,1]`% (Online Backup), `r PercentByColCDP[2,1]`% (Device Protection), dan `r PercentByColCTS[2,1]`% (Tech Support) dibandingkan dengan yang menggunakan `r PercentByColCO[2,3]`% (Online Security), `r PercentByColCOB[2,3]`% (Online Backup), `r PercentByColCDP[2,3]`% (Device Protection), dan `r PercentByColCTS[2,3]`% (Tech Support)
+
+Dari seluruh pelanggan, sebanyak `r PercentByTotalCC[2,1]`% merupakan pelanggan yang berlangganan month-to-month dan tidak melanjutkan langganan. Dari seluruh pelanggan yang tidak lanjut berlangganan, `r PercentByRowCC[2,1]`% merupakan pelanggan yang berlangganan month-to-month.
+
+Dari seluruh pelanggan yang tidak melanjutkan langganan, sebanyak `r PercentByRowCPB[2,2]`% menggunakan paperless billing.
+
+Dari seluruh pelanggan telkom, `r PercentByTotalCPM[2,3]`% yang tidak melanjutkan berlangganan menggunakan electronic check. Jika dilihat dari seluruh pelanggan yang menggunakan electronic check, `r PercentByColCPM[2,3]`% tidak lanjut berlangganan. Jika dilihat dari seluruh pelanggan yang tidak lanjut berlangganan, `r PercentByColCPM[2,3]`% menggunakan electronic check.
+
+## 3. Uji Independensi
+
+Ho: Churn independent terhadap Senior Citizen
+
+H1: Churn dependent terhadap Senior Citizen
+
+
+Ho: Churn independent terhadap Dependents
+
+H1: Churn dependent terhadap Dependents
+
+
+Ho: Churn independent terhadap Phone Service
+
+H1: Churn dependent terhadap Phone Service
+
+
+Ho: Churn independent terhadap Internet Service
+
+H1: Churn dependent terhadap Internet Service
+
+
+Ho: Churn independent terhadap Online Security
+
+H1: Churn dependent terhadap Online Security
+
+
+Ho: Churn independent terhadap Online Backup
+
+H1: Churn dependent terhadap Online Backup
+
+
+Ho: Churn independent terhadap Device Protection
+
+H1: Churn dependent terhadap Device Protection
+
+
+Ho: Churn independent terhadap Tech Support
+
+H1: Churn dependent terhadap Tech Support
+
+
+Ho: Churn independent terhadap Contract
+
+H1: Churn dependent terhadap Contract
+
+
+Ho: Churn independent terhadap Paperless Billing
+
+H1: Churn dependent terhadap Paperless Billing
+
+
+Ho: Churn independent terhadap Payment Method
+
+H1: Churn dependent terhadap Payment Method
+
+```{r}
+# Churn vs Senior Citizen
+chisq.test(table(data$Churn, data$SeniorCitizen))
+
+# Churn vs Dependents
+chisq.test(table(data$Churn, data$Dependents))
+
+# Churn vs Phone Service
+chisq.test(table(data$Churn, data$PhoneService))
+
+# Churn vs Internet Service
+chisq.test(table(data$Churn, data$InternetService))
+
+# Churn vs Online Security
+chisq.test(table(data$Churn, data$OnlineSecurity))
+
+# Churn vs Online Backup
+chisq.test(table(data$Churn, data$OnlineBackup))
+
+# Churn vs Device Protection
+chisq.test(table(data$Churn, data$DeviceProtection))
+
+# Churn vs Tech Support
+chisq.test(table(data$Churn, data$TechSupport))
+
+# Churn vs Contract
+chisq.test(table(data$Churn, data$Contract))
+
+# Churn vs Paperless Billing
+chisq.test(table(data$Churn, data$PaperlessBilling))
+
+# Churn vs Payment Method
+chisq.test(table(data$Churn, data$PaymentMethod))
+```
+
+## Kesimpulan analisa uji independensi
+
+Secara uji statistik, terbukti bahwa Churn dependent terhadap Senior Citizen, Dependents, Internet Service, Online Security, Online Backup, Device Protection, Tech Support, Contract, Paperless Billing, dan Payment Method. (Pvalue = 0)
+
+# Analisa Data Numerik
+## 1. Uji Hipotesa (T-Test dan Wilcoxon Sum Rank Test)
+
+Pada data telkom terdapat 3 data numerik yang tercatat, yaitu data durasi berlangganan (tenure), tagihan per bulan (MonthlyCharges), dan total biaya yang pernah di tagihkan (TotalCharges). Total Charges merupakan tenure * Monthly Charges. Oleh sebab itu, tidak akan dianalisa disini.
+
+Pertama-tama kita bandingkan dahulu tenure dengan data kategorikal yang lain. Untuk menemukan insight diantara kategori tersebut, mana yang lebih setia.
+
+```{r}
+# tenure
+op = par(mfrow = c(2,2))
+boxplot(data$tenure~data$Churn,
+        xlab = "Churn",
+        ylab = "tenure",
+        col = rainbow(2))
+
+boxplot(data$tenure~data$SeniorCitizen,
+        xlab = "Senior Citizen",
+        ylab = "tenure",
+        col = rainbow(2))
+
+boxplot(data$tenure~data$Dependents,
+        xlab = "Dependents",
+        ylab = "tenure",
+        col = rainbow(2))
+
+boxplot(data$tenure~data$InternetService,
+        xlab = "Internet Service",
+        ylab = "tenure",
+        col = rainbow(3))
+
+boxplot(data$tenure~data$OnlineSecurity,
+        xlab = "Online Security",
+        ylab = "tenure",
+        col = rainbow(3))
+
+boxplot(data$tenure~data$OnlineBackup,
+        xlab = "Online Backup",
+        ylab = "tenure",
+        col = rainbow(3))
+
+boxplot(data$tenure~data$DeviceProtection,
+        xlab = "Device Protection",
+        ylab = "tenure",
+        col = rainbow(3))
+
+boxplot(data$tenure~data$TechSupport,
+        xlab = "Tech Support",
+        ylab = "tenure",
+        col = rainbow(3))
+
+boxplot(data$tenure~data$Contract,
+        xlab = "Contract",
+        ylab = "tenure",
+        col = rainbow(3))
+
+boxplot(data$tenure~data$PaperlessBilling,
+        xlab = "Paperless Billing",
+        ylab = "tenure",
+        col = rainbow(2))
+
+boxplot(data$tenure~data$PaymentMethod,
+        xlab = "Payment Method",
+        ylab = "tenure",
+        col = rainbow(4))
+```
+
+Pada Boxplot churn terlihat bahwa rata rata kesetiaan no lebih tinggi dari yes. Kita akan lakukan uji hipotesa apakah dugaan ini sesuai dengan data yang ada.
+
+Ho: $\mu_N <= \mu_Y$
+
+H1: $\mu_N > \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP2 = t.test(data$tenure~data$Churn, alternative = "greater")
+ujiP2
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP2 = wilcox.test(data$tenure~data$Churn, alternative = "greater")
+ujiNP2
+```
+
+Pada uji parametrik diperoleh p-value = `r ujiP2$p.value` < $\alpha = 0.05$. Data tersebut membuktikan tolak Ho. Perbedaan mean Churn no dan yes sebesar `r ujiP2$estimate[1]-ujiP2$estimate[2]` adalah signifikan. 95% confidence interval dari perbedaan mean tenure ini berada pada [`r ujiP2$conf.int`]. Hasil uji ini juga sejalan dengan uji nonparametrik yaitu menolak Ho dengan p-value = `r ujiNP2$p.value`.
+
+Pada boxplot senior citizen terlihat rata-rata antara yes dan no nya hampir sama. Kita akan lakukan uji hipotesa apakah dugaan ini benar.
+
+Ho: $\mu_N = \mu_Y$
+
+H1: $\mu_N \neq \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP5 = t.test(data$tenure~data$SeniorCitizen)
+ujiP5
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP5 = wilcox.test(data$tenure~data$SeniorCitizen)
+ujiNP5
+```
+
+Pelanggan telkom yang yang sudah lanjut usia memiliki rata-rata kesetiaan yang sama. Uji parametrik memberikan p-value = `r ujiP5$p.value` dan uji nonparametrik memberikan p-value = `r ujiNP5$p.value`. 95% confidence interval dari perbedaan tenure berada pada [`r ujiP5$conf.int`]
+
+Pada Boxplot Dependents terlihat bahwa rata-rata kesetiaan no lebih rendah dari yes. Kita akan lakukan uji hipotesa apakah dugaan ini sesuai dengan data yang ada.
+
+Ho: $\mu_N >= \mu_Y$
+
+H1: $\mu_N < \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP6 = t.test(data$tenure~data$Dependents, alternative = "less")
+ujiP6
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP6 = wilcox.test(data$tenure~data$Dependents, alternative = "less")
+ujiNP6
+```
+
+Pada uji parametrik diperoleh p-value = `r ujiP6$p.value` < $\alpha = 0.05$. Data tersebut membuktikan tolak Ho. Perbedaan mean Dependents no dan yes sebesar `r ujiP6$estimate[1]-ujiP6$estimate[2]` adalah signifikan. 95% confidence interval dari perbedaan mean tenure ini berada pada [`r ujiP6$conf.int`]. Hasil uji ini juga sejalan dengan uji nonparametrik yaitu menolak Ho dengan p-value = `r ujiNP6$p.value`.
+
+Pada boxplot terlihat rata-rata Paperless Billing hampir sama. Kita akan lakukan uji hipotesa apakah dugaan ini sesuai dengan data yang ada.
+
+Ho: $\mu_N = \mu_Y$
+
+H1: $\mu_N \neq \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP1 = t.test(data$tenure~data$PaperlessBilling)
+ujiP1
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP1 = wilcox.test(data$tenure~data$PaperlessBilling)
+ujiNP1
+```
+
+Pelanggan telkom yang menggunakan paperless billing memiliki rata-rata kesetiaan yang sama. Uji parametrik memberikan p-value = `r ujiP1$p.value` dan uji nonparametrik memberikan p-value = `r ujiNP1$p.value`. 95% confidence interval dari perbedaan tenure berada pada [`r ujiP1$conf.int`]
+
+Sekarang kita akan bandingkan monthly charges dengan setiap data kategorikal.
+
+```{r}
+# Monthly Charges
+op = par(mfrow = c(2,2))
+boxplot(data$MonthlyCharges~data$Churn,
+        xlab = "Churn",
+        ylab = "Monthly Charges",
+        col = rainbow(2))
+
+boxplot(data$MonthlyCharges~data$SeniorCitizen,
+        xlab = "Senior Citizen",
+        ylab = "tenure",
+        col = rainbow(2))
+
+boxplot(data$MonthlyCharges~data$Dependents,
+        xlab = "Dependents",
+        ylab = "tenure",
+        col = rainbow(2))
+
+boxplot(data$MonthlyCharges~data$InternetService,
+        xlab = "Internet Service",
+        ylab = "Monthly Charges",
+        col = rainbow(3))
+
+boxplot(data$MonthlyCharges~data$OnlineSecurity,
+        xlab = "Online Security",
+        ylab = "Monthly Charges",
+        col = rainbow(3))
+
+boxplot(data$MonthlyCharges~data$OnlineBackup,
+        xlab = "Online Backup",
+        ylab = "Monthly Charges",
+        col = rainbow(3))
+
+boxplot(data$MonthlyCharges~data$DeviceProtection,
+        xlab = "Device Protection",
+        ylab = "Monthly Charges",
+        col = rainbow(3))
+
+boxplot(data$MonthlyCharges~data$TechSupport,
+        xlab = "Tech Support",
+        ylab = "Monthly Charges",
+        col = rainbow(3))
+
+boxplot(data$MonthlyCharges~data$Contract,
+        xlab = "Contract",
+        ylab = "Monthly Charges",
+        col = rainbow(3))
+
+boxplot(data$MonthlyCharges~data$PaperlessBilling,
+        xlab = "Paperless Billing",
+        ylab = "Monthly Charges",
+        col = rainbow(2))
+
+boxplot(data$MonthlyCharges~data$PaymentMethod,
+        xlab = "Payment Method",
+        ylab = "Monthly Charges",
+        col = rainbow(4))
+```
+
+Pada Boxplot churn terlihat bahwa rata-rata Monthly Charges no lebih rendah dari yes. Kita akan lakukan uji hipotesa apakah dugaan ini sesuai dengan data yang ada.
+
+Ho: $\mu_N >= \mu_Y$
+
+H1: $\mu_N < \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP3 = t.test(data$MonthlyCharges~data$Churn, alternative = "less")
+ujiP3
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP3 = wilcox.test(data$MonthlyCharges~data$Churn, alternative = "less")
+ujiNP3
+```
+
+Pada uji parametrik diperoleh p-value = `r ujiP3$p.value` < $\alpha = 0.05$. Data tersebut membuktikan tolak Ho. Perbedaan mean Churn no dan yes sebesar `r ujiP3$estimate[1]-ujiP3$estimate[2]` adalah signifikan. 95% confidence interval dari perbedaan mean Monthly Charges ini berada pada [`r ujiP3$conf.int`]. Hasil uji ini juga sejalan dengan uji nonparametrik yaitu menolak Ho dengan p-value = `r ujiNP3$p.value`.
+
+Pada Boxplot Senior Citizen terlihat bahwa rata-rata Monthly Charges no lebih rendah dari yes. Kita akan lakukan uji hipotesa apakah dugaan ini sesuai dengan data yang ada.
+
+Ho: $\mu_N >= \mu_Y$
+
+H1: $\mu_N < \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP7 = t.test(data$MonthlyCharges~data$SeniorCitizen, alternative = "less")
+ujiP7
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP7 = wilcox.test(data$MonthlyCharges~data$SeniorCitizen, alternative = "less")
+ujiNP7
+```
+
+Pada uji parametrik diperoleh p-value = `r ujiP7$p.value` < $\alpha = 0.05$. Data tersebut membuktikan tolak Ho. Perbedaan mean Senior Citizen no dan yes sebesar `r ujiP7$estimate[1]-ujiP7$estimate[2]` adalah signifikan. 95% confidence interval dari perbedaan mean Monthly Charges ini berada pada [`r ujiP7$conf.int`]. Hasil uji ini juga sejalan dengan uji nonparametrik yaitu menolak Ho dengan p-value = `r ujiNP7$p.value`.
+
+Pada Boxplot Dependents terlihat bahwa rata-rata Monthly Charges no lebih tinggi dari yes. Kita akan lakukan uji hipotesa apakah dugaan ini sesuai dengan data yang ada.
+
+Ho: $\mu_N <= \mu_Y$
+
+H1: $\mu_N > \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP8 = t.test(data$MonthlyCharges~data$Dependents, alternative = "greater")
+ujiP8
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP8 = wilcox.test(data$MonthlyCharges~data$Dependents, alternative = "greater")
+ujiNP8
+```
+
+Pada uji parametrik diperoleh p-value = `r ujiP8$p.value` < $\alpha = 0.05$. Data tersebut membuktikan tolak Ho. Perbedaan mean dependents no dan yes sebesar `r ujiP8$estimate[1]-ujiP8$estimate[2]` adalah signifikan. 95% confidence interval dari perbedaan mean Monthly Charges ini berada pada [`r ujiP8$conf.int`]. Hasil uji ini juga sejalan dengan uji nonparametrik yaitu menolak Ho dengan p-value = `r ujiNP8$p.value`.
+
+Pada boxplot paperless billing, terlihat bahwa rata-rata no lebih rendah dari yes. Gunakan uji hipotesa untuk membuktikan dugaan ini benar dengan data
+
+Ho: $\mu_N >= \mu_Y$
+
+H1: $\mu_N < \mu_Y$
+
+```{r}
+#parametrik test: Two-sample t-test
+ujiP4 = t.test(data$MonthlyCharges~data$PaperlessBilling, alternative = "less")
+ujiP4
+
+#Nonparametrik test: wilcoxon sum-rank test
+ujiNP4 = wilcox.test(data$MonthlyCharges~data$PaperlessBilling, alternative = "less")
+ujiNP4
+```
+
+Pada uji parametrik diperoleh p-value = `r ujiP4$p.value` < $\alpha = 0.05$. Data tersebut membuktikan tolak Ho. Perbedaan mean Paperless Billing no dan yes sebesar `r ujiP4$estimate[1]-ujiP4$estimate[2]` adalah signifikan. 95% confidence interval dari perbedaan mean Monthly Charges ini berada pada [`r ujiP4$conf.int`]. Hasil uji ini juga sejalan dengan uji nonparametrik yaitu menolak Ho dengan p-value = `r ujiNP4$p.value`.
+
+## 2. ANOVA
+
+ANOVA disini digunakan untuk menguji mean terhadap lebih dari 2 grup. Pada kasus data telkom ini, kita ingin menguji apakah rata-rata loyalitas pelanggan (tenure) dari semua jenis Contract ($H_0$) adalah sama, atau setidaknya ada satu jenis Contract yang memiliki rata-rata loyalitas yang berbeda ($H_1$)
+
+$H_o : \mu_m = \mu_o = \mu_t$
+
+$H_1 : \mu_m \neq \mu_o \neq \mu_t \neq \mu$
+
+### Data Deskripsi
+
+```{r}
+aggregate(data$tenure~data$Contract, data, function(x) round(c(mean = mean(x), sd = sd(x)),2))
+```
+
+Disini terlihat bahwa pelanggan dengan Contract two year memiliki rata-rata tenure paling tinggi bila dibandingkan dengan rata-rata tenure Contract yang lain. Tapi, standar deviasi dari Contract one year adalah yang paling besar. Hal ini menandakan rentang loyalitas dari pelanggan dengan Contract one year adalah yang paling lebar.
+
+untuk menguji dugaan bahwa rata-rata tenure berdasarkan Contract tidaklah sama, maka akan digunakan ANOVA
+
+```{r}
+aov_tenure_Contract = aov(data$tenure~data$Contract, data)
+summary(aov_tenure_Contract)
+```
+
+pada uji ini diperoleh p-value < 2e-16 (tolak Ho). Hal ini menandakan bahwa rata-rata tenure berdasarkan Contract tidak semua sama.
+
+### Diagnostic Check
+
+#### 1. Independent Test
+
+$H_0$: residual independent
+
+$H_1$: residual dependent
+
+```{r}
+residual_tenure_Contract = resid(aov_tenure_Contract)
+
+library(car)
+residualPlot(aov_tenure_Contract)
+plot(residual_tenure_Contract, type = 'l')
+durbinWatsonTest(aov_tenure_Contract)
+```
+Pada durbin-watson test diperoleh nilai autocorrelasi sebesar = -0,0037 dengan p-value = 0,812. karena p-value lebih besar dari 0.05, hal ini menunjukkan bahwa residual bersifat independen. Dapat disimpulkan asumsi independensi pada residual TERPENUHI
+
+### 2. Normality Test
+
+uji normalitas digunakan untuk mengetahui apakah asumsi residual berdistribusi secara normal terpenuhi
+
+$H_0$: residual berdistribusi normal
+
+$H_1$: residual tidak berdistribusi normal
+
+karena data lebih dari 5000 data, maka shapiro-wilk test tidak dapat digunakan untuk melakukan normality test. oleh karena itu, digunakan anderson darling test karena dapat mengolah lebih dari 5000 data.
+
+```{r}
+op = par(mfrow=c(1,2))
+hist(residual_tenure_Contract)
+qqPlot(residual_tenure_Contract)
+
+library(nortest)
+ad.test(residual_tenure_Contract)
+```
+Pada QQ-plot, terlihat beberapa titik data di ujung yang menjauh dari garis diagonal. Hal ini mengindikasikan bahwa residual tidak terdistribusi normal. Hal ini didukung oleh Anderson Darling test yang menghasilkan p-value < 2.2e-16 (tolak Ho). Dapat disimpulkan bahwa residual TIDAK memenuhi asumsi normalitas
+
+#### 3. homogenitas pada variance
+
+pada uji ini diharapkan residual memiliki variance konstan (sama untuk setiap Contract)
+
+$H_0$: variance konstan (homoscedastic)
+
+$H_1$: variance tidak konstan (heteroscedastic)
+
+untuk menguji variance konstan akan digunakan levene test
+
+```{r}
+residualPlot(aov_tenure_Contract)
+leveneTest(data$tenure ~ data$Contract, data)
+```
+dari levene test diperoleh pvalue = 3.217e-13. hal ini menunjukkan bahwa variance residual tidak konstan. Pada data ini seluruh asumsi homogenitas tidak terpenuhi.
+
+# KESIMPULAN AKHIR
+
+## Karakteristik Pelanggan yang rentan churn
+Pelanggan yang berhenti berlangganan biasanya memiliki contract yang month-to-month karena mereka tidak ada halangan untuk berhenti. Analisis ANOVA juga membuktikan bahwa pelanggan dengan contract ini memiliki rata-rata tenure yang paling rendah. Selain itu pelanggan dengan Monthly Charges yang tinggi juga rentan churn. Hal ini dapat dibuktikan dengen churn pelanggan dengan tagihan bulanan rata-ratanya jauh lebih tinggi daripada pelanggan yang setia. Uji hipotesa menunjukkan jika pelanggan yang churn memiliki rata-rata tenure yang rendah. 
+
